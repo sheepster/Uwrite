@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uwrite</title>
+    <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
+</head>
+<body>
+    <h1> This is index template </h1>
+    <h4>
+        <!-- <a href="/Uwrite/mains/{{item.id}}/"></a> -->
+        {% for item in items %}
+        <a href="{% url 'detail' item.id %}">
+        Имя: {{item.name}}  | Цена:  {{item.price}}  | Описание:  {{item.description}} </br>
+
+        {% endfor %}
+        </a>
+    </h4>
+</body>
+</html>
