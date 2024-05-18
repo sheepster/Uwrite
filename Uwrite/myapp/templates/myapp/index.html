@@ -7,8 +7,19 @@
     <title>Uwrite</title>
     <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
 </head>
-<body class="bg-sky-500">
-    <h1> This is index template </h1>
+<body>
+	<nav>
+		<div>
+			<div>
+				<div>
+					<div class="flex">
+							<img class="h-8 w-8" src="{% static 'myapp/images/icon.png' %}" alt="logo"/>
+							<span class="text-4xl">Uwrite</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</nav>
     <h4>
         <!-- <a href="/Uwrite/mains/{{item.id}}/"></a> -->
         {% for item in items %}
