@@ -5,8 +5,9 @@
     <h4>
         <!-- <a href="/Uwrite/mains/{{item.id}}/"></a> -->
         {% for item in items %}
-        <a href="{% url 'detail' item.id %}" class="font-semi text-xl">
+        <a href="{% url 'myapp:detail' item.id %}" class="font-semi text-xl">
         Имя: {{item.name}}  | Цена:  {{item.price}}  | Описание:  {{item.description}} </br>
+				<img src="{{item.image.url}}" alt="">
 
         {% endfor %}
         </a>
