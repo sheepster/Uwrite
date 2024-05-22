@@ -1,6 +1,7 @@
 {% extends "myapp/base.html" %}
 
 {% block content%}
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
 	<div class="sm:text-center lg:text-left">
 		<h1 class="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
@@ -11,7 +12,7 @@
 	</div>
 
 
-	<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-col-3 lg:grid-col-3 gap-5">
+	<div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 gap-5">
 		{% for item in items %}
 			<a href="{% url 'myapp:detail' item.id %}">
 				<div class=" rounded overflow-hidden shadow-lg">

@@ -1,40 +1,61 @@
 {% extends "myapp/base.html" %}
-{% block content%}
+
 {% load static %}
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UWrite - Главная страница</title>
-  <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
-</head>
-<body>
-  <header>
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    {% block content%}
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     
-  </header>
+    <body class="bg-gray-300">
+        <main class="container mx-auto py-12">
+            <section class="flex flex-col md:flex-row items-center justify-between">
+                <div class="md:w-1/2">
+                    <h1 class="text-4xl font-bold mb-4">Лабораторная установка по проведению факультативных занятий в области ИБ</h1>
+                    <p class="text-lg mb-6">
+                        Наши онлайн курсы помогут тебе стать уверенным специалистом в области ИБ.
+                    </p>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Начать обучение
+                    </button>
+                </div>
+                <div class="md:w-1/2 mt-6 md:mt-0">
+                    <img src="https://source.unsplash.com/1200x600/?hacking,whitehead" alt="Uwrite курс" class="rounded-md">
+                </div>
+            </section>
 
-  <main>
-    <section>
-      <h2>Добро пожаловать в UWrite!</h2>
-      <p>UWrite - это платформа онлайн-курсов, где вы можете учиться у экспертов и развивать свои навыки письма.</p>
-      <p>Мы предлагаем широкий спектр курсов по всем аспектам письма, от основ до продвинутых техник. Наши курсы разработаны для писателей всех уровней, от начинающих до опытных.</p>
-      <p>Готовы начать учиться? <a href="courses.html">Просмотрите наши курсы</a> сегодня и начните свой путь к лучшему письму!</p>
-    </section>
-
-    <section>
-      <h2>Популярные курсы:</h2>
-      <ul>
-        <li><a href="#">Как написать убедительное эссе</a></li>
-        <li><a href="#">10 советов для начинающих писателей</a></li>
-        <li><a href="#">Как найти свое писательское призвание</a></li>
-        <li><a href="#">10 лучших книг для писателей</a></li>
-      </ul>
-    </section>
-  </main>
-
-  <footer>
-    <p>Copyright &copy; 2023 UWrite.</p>
-  </footer>
-</body>
-</html>
-{% endblock content%}
+            <section class="mt-12">
+              <h2 class="text-2xl font-bold mb-4">Наши популярные курсы:</h2>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div class="bg-white rounded-md shadow-md p-4">
+                      <h3 class="text-xl font-bold mb-2">Курс по активному фаззингу веб-приложений</h3>
+                      <p class="text-gray-600 mb-4">
+                          Узнайте как проводить автоматическое и полуавтоматическое тестирование программ.
+                      </p>
+                      <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                          Подробнее
+                      </a>
+                  </div>
+                  <div class="bg-white rounded-md shadow-md p-4">
+                      <h3 class="text-xl font-bold mb-2">Курс по пассивному сбору информации</h3>
+                      <p class="text-gray-600 mb-4">
+                          Узнайте как собирать информацио о выбранной цели без обнаружения.
+                      </p>
+                      <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                          Подробнее
+                      </a>
+                  </div>
+                  <div class="bg-white rounded-md shadow-md p-4">
+                      <h3 class="text-xl font-bold mb-2">Курс по изучению  SQL-иньекций</h3>
+                      <p class="text-gray-600 mb-4">
+                          Узнайте, что такое SQL-иньекции, для чего они нужны и как их использовать.
+                      </p>
+                      <a href="#" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                          Подробнее
+                      </a>
+                  </div>
+              </div>
+          </section>
+        </main>
+        {% endblock content%}
+    </body>
+    

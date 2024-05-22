@@ -1,23 +1,18 @@
 {% load static %}
-<nav>
-    <div class="bg-white shadow-lg">
-      <div class="max-w-6xl mx-auto px-4">
-        <div class="flex justify-between">
-          <div class="flex space-x-7">
-              <div>
-                <a href="#" class="flex items-center px-2 py-4">
-                <img class="h-8 w-8" src="{% static 'myapp/images/icon.png' %}" alt="logo"/>
-                <span class="text-gray-500 font-semibold text-4xl">Uwrite</span>
-                </a>
-              </div>
-              <div class="items-center flex space-x-1">
-                <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-blue-500">Home</a>
-                <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-blue-500">About</a>
-                <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-blue-500">Contacts</a>
-                <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-blue-500">Login</a>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+<header class="bg-white shadow-md">
+  <div class="container mx-auto py-4 flex justify-between items-center">
+      <a href="{% url 'main' %}" class="font-bold text-xl">Uwrite</a>
+      <nav class="hidden md:block">
+          <ul class="flex space-x-8">
+              <li><a href="#" class="hover:underline">Курсы</a></li>
+              <li><a href="#" class="hover:underline">О нас</a></li>
+              <li><a href="#" class="hover:underline">Контакты</a></li>
+          </ul>
+      </nav>
+      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+          Войти
+      </button>
+  </div>
+</header>
+
+
