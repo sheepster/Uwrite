@@ -37,6 +37,14 @@ def update_task(request, my_id):
         item.description = request.POST.get("description")
         item.image = request.FILES.get("upload", item.image)
         item.save()
-        redirect("/myapp/")
+        return redirect("/Uwrite/")
     context = {"item":item}
     return render(request, "myapp/update_task.html", context)
+
+def delete_task(request, my_id):
+    item = Product.objects.get(id=my_id)
+    if request.method == "POST":
+        item.delete()
+        return redirect("/Uwrite/")
+    context = {"item":item}
+    return render(request, "myapp/delete_task.html", context)
