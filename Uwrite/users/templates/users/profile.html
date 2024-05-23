@@ -1,0 +1,76 @@
+
+{% extends "myapp/base.html" %}
+{% block content %}
+<body class="bg-gray-100">
+<!-- 
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto py-4 flex justify-between items-center">
+            <a href="#" class="font-bold text-xl">Uwrite</a>
+            <nav class="hidden md:block">
+                <ul class="flex space-x-8">
+                    <li><a href="#" class="hover:underline">Курсы</a></li>
+                    <li><a href="#" class="hover:underline">О нас</a></li>
+                    <li><a href="#" class="hover:underline">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="flex items-center">
+                    
+                <a href="{% url 'users:logout' %}" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Выйти
+                </a>
+            </div>
+        </div>
+    </header> -->
+    {% if user.profile %}
+    <main class="container mx-auto py-12">
+        <section class="bg-white rounded-md shadow-md p-8">
+            <h2 class="text-4xl font-bold mb-4">Личный кабинет</h2>
+            <div>
+                {% if user.profile.image %}
+                <img src="{{ user.profile.image.url }}">
+                {% endif %}
+                <span class="text-2xl text-black font-bold mb-4">{{ user.username }}</span> 
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="text-2xl font-bold mb-2 mt-4">Мои курсы</h3>
+                    <ul class="list-disc pl-5">
+                        {% for course in user.courses.all %}
+                            <li class="mb-2">
+                                <a href="{% url 'courses:detail' course.id %}" class="hover:underline">
+                                    {{ course.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-2">Прогресс</h3>
+                    <div class="bg-gray-200 rounded-md p-4">
+                        <p class="text-gray-600">
+                            Здесь будет отображаться ваш прогресс по курсам.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {% else %}
+    <div class="container py-5">
+        <h1 class="text-2xl m-10 font-bold">Register User</h1>
+        <form class="w-2/5 bg-white-700 shadow-md m-10 rounded px-8 pt-6 pb-8 mb-4" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-2">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Upload profile image </label>
+                <input class="block mt-4" type="file" accept="image/*" name="upload" id="upload" required>
+                <label class="block text-gray-700 text-sm font-bold mt-5 mb-2">Contact number</label>
+                <input class="block mt-4" type="text"  name="number" id="number">
+            </div>
+            <button class="bg-green-500 text-white px-5 py-2" type="submit">Create Profile</button>
+        </form>
+    </div>
+    {% endif %}
+{% endblock content %}
+</body>
+</html>

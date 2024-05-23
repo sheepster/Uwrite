@@ -7,12 +7,20 @@
               <li><a href="#" class="hover:underline">Курсы</a></li>
               <li><a href="#" class="hover:underline">О нас</a></li>
               <li><a href="#" class="hover:underline">Контакты</a></li>
+              <li><a href="{% url 'users:profile' %}">Профиль</a></li>
           </ul>
       </nav>
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-          Войти
-      </button>
+            {% if user.is_authenticated %}
+            <form class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" action="{% url 'users:logout' %}" method="POST">
+                {% csrf_token %}
+                <span class="text-white mr-4">Привет, {{ user.username }}!</span>
+                <button type="submit">Выйти</button>
+              </form>
+                {% else %}
+                <a href="{% url 'users:login' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" >
+                    Войти
+                </a>
+            {% endif %}
+            
   </div>
 </header>
-
-
