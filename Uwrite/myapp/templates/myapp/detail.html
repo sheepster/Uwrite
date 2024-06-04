@@ -10,7 +10,7 @@
             <p class="mt-5 text-green-500">{{ item.price | intcomma }} Баллов</p>
             <p class="mt-5 text-gray-500">{{ item.description }}</p>
             <p class="mt-5 text-gray-500">Автор: {{ item.author }}</p>
-            <p class="mt-5 text-gray-500 ">{{ item.file }}</p>
+            <p class="mt-5 text-gray-500 "><a href ="{{ item.file.url }}">Полезные материалы</a></p>
             <!-- <p class="mt-5 text-gray-500">{{ item.description }}</p> -->
 
             {%if request.user.is_staff %}

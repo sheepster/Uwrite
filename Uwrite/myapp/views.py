@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
-from .models import Product
+from .models import Product, Tasks
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 # from .models import  UserCourse
@@ -11,6 +11,17 @@ from django.views.generic import ListView, DetailView
 #         "items":items
 #     }
 #     return render(request, "myapp/index.html",context)
+
+
+class TaskDetailView(DetailView):
+    model = Tasks
+    template_name = "myapp/task_detail.html"
+    context_object_name = "task"
+
+class TaskListView(ListView):
+    model = Tasks
+    template_name = "myapp/task_list.html"
+    context_object_name = "tasks"
 
 
 class ProductListView(ListView):
@@ -85,3 +96,5 @@ def delete_course(request, my_id):
 #         "items": items
 #     }   
 #     return render(request, "myapp/add_course.html", context=context)
+
+

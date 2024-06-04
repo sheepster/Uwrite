@@ -17,10 +17,11 @@
                 <div>
                     <h3 class="text-2xl font-bold mb-2 mt-4">Мои курсы</h3>
                     <ul class="list-disc pl-5">
-                        {% for course in user.courses.all %}
+                        
+                        {% for course in user.profile.courses.all %}
                             <li class="mb-2">
-                                <a href="{% url 'courses:detail' course.id %}" class="hover:underline">
-                                    {{ course.title }}
+                                <a href="{% url 'myapp:detail' course.id %}" class="hover:underline">
+                                    {{ course.name | title }}
                                 </a>
                             </li>
                         {% endfor %}
