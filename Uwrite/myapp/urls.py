@@ -1,5 +1,5 @@
 from django.urls import path
-from myapp.views import glavnaya, add_course, update_course, delete_course, ProductListView, ProductDetailView, TaskListView, TaskDetailView
+from myapp.views import glavnaya, add_course, update_course, delete_course, ProductListView, ProductDetailView, task_detail, enroll_course
 
 app_name = "myapp"
 
@@ -8,8 +8,8 @@ urlpatterns = [
     # path('',index, name='index'),
     path('courses',ProductListView.as_view(), name='index'),
     path('courses/<int:pk>/',ProductDetailView.as_view(), name="detail"),
-    path('tasks',TaskListView.as_view(), name='tasks'),
-    path('tasks/<int:pk>/',TaskDetailView.as_view(), name="task_detail"),
+    path('task/<int:task_id>/', task_detail, name='task_detail'),
+    path('enroll/<int:course_id>/', enroll_course, name='enroll_course'),
     path('add_course/',add_course, name="add_course"),
     path('',glavnaya, name="main"),
     path("update_course/<int:my_id>/",update_course, name="update_course"),

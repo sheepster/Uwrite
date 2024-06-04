@@ -1,0 +1,36 @@
+{% extends "myapp/base.html" %}
+{% block content %}
+<div class="container mx-auto py-12">
+    <h2 class="text-2xl font-bold mb-4">Доступные курсы</h2>
+
+    {% for product in enroll_course %}
+    <div class="bg-white rounded-md shadow-md p-8 mb-4">
+        <h3 class="text-xl font-bold mb-2">{{ product.name }}</h3>
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-48 h-48 rounded-md mb-2">
+        <p class="text-gray-600">{{ product.description }}</p>
+        <div class="flex space-x-4">
+            {% if product in enrolled_courses %}
+            <p class="bg-green-500 text-white font-bold py-2 px-4 rounded">Вы записаны</p>
+            {% else %}
+            <a href="{% url 'enroll_course' product.id %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Записаться</a>
+            {% endif %}
+            <a href="{% url 'task_detail' product.tasks.first.id %}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">Перейти к задачам</a>
+        </div>
+
+        <h4 class="text-lg font-bold mt-4">Задачи:</h4>
+        <ul class="list-disc pl-5">
+            {% for task in product.tasks.all %}
+            <li class="mb-2">
+                <a href="{% url 'task_detail' task.id %}" class="hover:underline">
+                    {{ task.name }}
+                    {% if task in user.profile.completed_tasks.all %}
+                    <span class="text-green-500 font-bold">(Выполнено)</span>
+                    {% endif %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

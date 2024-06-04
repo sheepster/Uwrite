@@ -10,6 +10,16 @@
 </head>
 
 <body>
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}bg-{{ message.tags }}{% else %}bg-blue-500{% endif %} text-white font-bold py-2 px-4 rounded">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     {% block content %}
     {% endblock content %}
     

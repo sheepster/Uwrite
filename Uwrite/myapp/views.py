@@ -1,8 +1,11 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import Product, Tasks
+from users.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
+from django.contrib import messages
+
 # from .models import  UserCourse
 
 # def index(request):
@@ -13,15 +16,6 @@ from django.views.generic import ListView, DetailView
 #     return render(request, "myapp/index.html",context)
 
 
-class TaskDetailView(DetailView):
-    model = Tasks
-    template_name = "myapp/task_detail.html"
-    context_object_name = "task"
-
-class TaskListView(ListView):
-    model = Tasks
-    template_name = "myapp/task_list.html"
-    context_object_name = "tasks"
 
 
 class ProductListView(ListView):
@@ -98,3 +92,43 @@ def delete_course(request, my_id):
 #     return render(request, "myapp/add_course.html", context=context)
 
 
+# @login_required
+# def products_list(request):
+#     user = request.user
+#     products = Product.objects.all()
+#     enrolled_courses = user.profile.courses.all()
+    
+#     context = {
+#         "products": products,
+#         "enrolled_courses": enrolled_courses
+#     }
+#     return render(request, "myapp/products_list.html", context)
+
+@login_required
+def task_detail(request, task_id):
+    task = Tasks.objects.get(id=task_id)
+    user = request.user
+    profile = Profile.objects.get(user=user)
+
+    if request.method == "POST":
+        user_value = request.POST.get("user_value")
+        if user_value == task.valid_value:
+            profile.completed_tasks.add(task)
+            messages.success(request, "Задача успешно выполнена!")
+        else:
+            messages.error(request, "Неправильное значение.")
+        return redirect('myapp:task_detail', task_id=task_id)
+
+    context = {
+        "task": task,
+        "is_completed": task in profile.completed_tasks.all()
+    }
+    return render(request, "myapp/task_detail.html", context)
+
+@login_required
+def enroll_course(request, course_id):
+    user = request.user
+    course = Product.objects.get(id=course_id)
+    user.profile.courses.add(course)
+    messages.success(request, f"Вы успешно записались на курс {course.name}!")
+    return redirect('myapp:index')

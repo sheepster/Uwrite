@@ -11,7 +11,7 @@ from .forms import ProfileForm
 def register(request):
     if request.method == "POST":
         form = NewUserForm(request.POST)
-        if form.is_valid():
+        if form.is_valid() :
             user = form.save()
             login(request, user)
             return redirect("myapp:main")
@@ -32,8 +32,26 @@ def author_profile(request, id):
 
 @login_required
 def profile(request):
-    return render(request, "users/profile.html")
+    user = request.user
+    enrolled_courses = user.profile.courses.all()
 
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=user.profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Профиль обновлен!")
+            return redirect('users:profile')  # Перенаправление на страницу профиля
+        else:
+            messages.error(request, "Ошибка обновления профиля. Проверьте введенные данные.")
+    else:
+        form = ProfileForm(instance=user.profile)
+
+    context = {
+        "form": form,
+        "enrolled_courses": enrolled_courses,
+    }
+
+    return render(request, "users/profile.html", context)
 
 
 

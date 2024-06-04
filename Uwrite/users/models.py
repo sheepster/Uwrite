@@ -8,7 +8,7 @@ class Profile(models.Model):
     image = models.ImageField(blank=True, upload_to='_profile_images')
     contact_number = models.CharField(max_length=50,    default="79049550145")
     courses = models.ManyToManyField(Product, default=None)
-    complite_tasks = models.ManyToManyField(Tasks,default=None)
+    completed_tasks = models.ManyToManyField(Tasks,default=None)
 
     def __str__(self):
         return self.user.username
