@@ -5,7 +5,7 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(blank=True, upload_to='_profile_images')
-    contact_number = models.CharField(max_length=11,    default="+79991231234")
+    contact_number = models.CharField(max_length=50,    default="79049550145")
 
     def __str__(self):
         return self.user.username

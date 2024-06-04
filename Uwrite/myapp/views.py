@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Product
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
-
+# from .models import  UserCourse
 
 # def index(request):
 #     items = Product.objects.all()
@@ -37,19 +37,23 @@ def glavnaya(request):
     return render(request, "myapp/index1.html")
 
 @login_required
-def add_task(request):
+def add_course(request):
     if request.method == "POST":
+        item.author = request.POST.get("author")
         name = request.POST.get("name")
         price = request.POST.get("price")
         description = request.POST.get("description")
         image = request.FILES["upload"]
         item = Product(name=name, price=price, description=description, image=image)
         item.save()
-    return render(request, "myapp/add_task.html")
+    return render(request, "myapp/add_course.html")
 
-def update_task(request, my_id):
+
+@login_required
+def update_course(request, my_id):
     item = Product.objects.get(id=my_id)
     if request.method == "POST":
+        item.author = request.POST.get("author")
         item.name = request.POST.get("name")
         item.price = request.POST.get("price")
         item.description = request.POST.get("description")
@@ -57,12 +61,27 @@ def update_task(request, my_id):
         item.save()
         return redirect("/Uwrite/")
     context = {"item":item}
-    return render(request, "myapp/update_task.html", context)
+    return render(request, "myapp/update_course.html", context)
 
-def delete_task(request, my_id):
+@login_required
+def delete_course(request, my_id):
     item = Product.objects.get(id=my_id)
     if request.method == "POST":
         item.delete()
         return redirect("/Uwrite/")
     context = {"item":item}
-    return render(request, "myapp/delete_task.html", context)
+    return render(request, "myapp/delete_course.html", context)
+
+# def add_user_course(request):
+#     if request.method == "POST":
+#         user = request.user
+#         course_id = request.POST.get("course_id")
+#         course = Product.objects.get(id=course_id)
+#         user_course = UserCourse(user=user, course=course)
+#         user_course.save()
+#         return redirect("myapp/profile.html")
+#     items = Product.objects.all()
+#     context = {
+#         "items": items
+#     }   
+#     return render(request, "myapp/add_course.html", context=context)

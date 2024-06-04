@@ -9,8 +9,15 @@
             <p class="mt-5">{{ item.name }}</p>
             <p class="mt-5 text-green-500">{{ item.price | intcomma }} Баллов</p>
             <p class="mt-5 text-gray-500">{{ item.description }}</p>
-            <button class="bg-green-500 text-white mt-[50px]"><a href="{% url 'myapp:update_task' item.id %}">Update task</a></button>
-            <button class="bg-red-700 text-white mt-[50px]"><a href="{% url 'myapp:delete_task' item.id %}">Delete task</a></button>
+            <p class="mt-5 text-gray-500">Автор: {{ item.author }}</p>
+            <p class="mt-5 text-gray-500 ">{{ item.file }}</p>
+            <!-- <p class="mt-5 text-gray-500">{{ item.description }}</p> -->
+
+            {%if request.user.is_staff %}
+            <button class="bg-green-500 text-white mt-[50px]"><a href="{% url 'myapp:update_course' item.id %}">Update course</a></button>
+            <button class="bg-red-700 text-white mt-[50px]"><a href="{% url 'myapp:delete_course' item.id %}">Delete course</a></button>
+            {%endif%}
+
         </div>
     </div>
 {% endblock content%}

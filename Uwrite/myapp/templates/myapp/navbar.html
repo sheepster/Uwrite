@@ -4,7 +4,7 @@
       <a href="{% url 'myapp:main' %}" class="font-bold text-xl">Uwrite</a>
       <nav class="hidden md:block">
           <ul class="flex space-x-8">
-              <li><a href="#" class="hover:underline">Курсы</a></li>
+              <li><a href="{% url 'myapp:index' %}" class="hover:underline">Курсы</a></li>
               <li><a href="#" class="hover:underline">О нас</a></li>
               <li><a href="#" class="hover:underline">Контакты</a></li>
               <li><a href="{% url 'users:profile' %}">Профиль</a></li>
